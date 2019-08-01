@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-HPDS-Data/Pods-HPDS-Data-resources.sh
+${PODS_ROOT}/AWAREFramework/AWAREFramework/Assets/AWARE.xcdatamodeld
+${PODS_CONFIGURATION_BUILD_DIR}/AWAREFramework/AWAREFramework.bundle
+${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle
