@@ -42,7 +42,7 @@ def qualtricsAnalysis(df):
 
 
 # analyze accelerometer data
-def accelAnalysis(df):
+def misAnalysis(df):
     print(df.to_string())
 
 
@@ -56,8 +56,8 @@ if __name__ == "__main__":
 
     actdf = gen_df_from_remote_SQL(hostname, username,
                                    password, database_name, "aware_device")
-    acceldf = gen_df_from_remote_SQL(hostname, username,
-                                     password, database_name, "accelerometer")
+    misdf = gen_df_from_remote_SQL(hostname, username,
+                                   password, database_name, "battery")
     healquandf = gen_df_from_remote_SQL(hostname, username,
                                         password, database_name, "health_kit_quantity")
     healcatdf = gen_df_from_remote_SQL(hostname, username,
@@ -66,6 +66,6 @@ if __name__ == "__main__":
 
     # qualtricsAnalysis(qualdf)
     # activitiesAnalysis(actdf)
-    healthQuanAnalysis(healquandf)
-    # healthCatAnalysis(healcatdf)
-    # accelAnalysis(acceldf)
+    # healthQuanAnalysis(healquandf)
+    healthCatAnalysis(healcatdf)
+    # misAnalysis(misdf)

@@ -2,8 +2,8 @@
 //  AboutScreenViewController.swift
 //  HPDS-Data
 //
-//  Created by Michael Cooper on 2018-07-20.
-//  Copyright © 2018 Michael Cooper. All rights reserved.
+//  Created by Joshua Ren on 2019-06-24.
+//  Copyright © 2019 Joshua Ren. All rights reserved.
 //
 
 import UIKit

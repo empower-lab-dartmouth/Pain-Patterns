@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  HPDS-Data
 //
-//  Created by Michael Cooper on 2018-07-12.
-//  Copyright © 2018 Michael Cooper. All rights reserved.
+//  Created by Joshua Ren on 2019-06-24.
+//  Copyright © 2019 Joshua Ren. All rights reserved.
 //
 
 import UIKit
@@ -19,39 +19,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var study: AWAREStudy!
     var manager: AWARESensorManager!
 
+    //Returns an instance of the current AppDelegate - this is used to access class-level
+    //variables of this AppDelegate in other files.
     static func shared() -> AppDelegate {
-        //Returns an instance of the current AppDelegate - this is used to access class-level
-        //variables of this AppDelegate in other files.
         return UIApplication.shared.delegate as! AppDelegate
     }
     
+    //Returns the URL of the AWARE study on which this application is running
     func getUrl() -> String {
-        //Returns the URL of the AWARE study on which this application is running
         return "https://api.awareframework.com/index.php/webservice/index/2439/QPnWjaZXyx6l"
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.core = AWARECore.shared()                         //Initialize AWARE Core
+        self.core = AWARECore.shared()                          //Initialize AWARE Core
         self.study = AWAREStudy.shared()                        //Initialize AWARE Study
-        self.study.setDebug(false)                               //Debugging settings - turn off when running in production
+        self.study.setDebug(false)                              //Debugging settings - turn off when running in production
         self.manager = AWARESensorManager.shared()              //Initialize AWARE Sensor Manager
         
-        
         core.activate()
+        core.requestPermissionForBackgroundSensing()            //Request permission to perform background sensing
 
-        //Request permission to perform background sensing
-        core.requestPermissionForBackgroundSensing()
         
         //Declare, initialize AWARE sensors
         let healthkit = AWAREHealthKit(awareStudy: self.study)
         let activity = IOSActivityRecognition(awareStudy: self.study)
         
-        //initialize notification capabilities and enlist them
-        registerForPushNotifications()
-        createPushNotifications()
-        
-        //Setup background fetching interval
+        //Setup background fetching interval for sensors
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
         //Add AWARE sensors to the sensor manager
@@ -68,45 +62,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.manager?.startAllSensors()                         //Start sensors running
         })
         
+        //initialize notification capabilities and enlist them
+        registerForPushNotifications()
+        createPushNotifications()
+        
         print("Setup complete.")
 
         return true
     }
     
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        
+
         //Here we use this to sync up our data with AWARE.
         self.manager?.syncAllSensors()
     }
     
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
         //Start sensors operating in the background
         self.manager?.startAllSensors()
-
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-
-    }
+    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    func applicationWillEnterForeground(_ application: UIApplication) {}
     
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+      
         self.manager?.startAllSensors()
 
     }
     
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         self.manager?.startAllSensors()
         self.manager?.syncAllSensors()
     }
     
+    // Called in order to get permissions to send notificatoins
     func registerForPushNotifications() {
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) {
@@ -118,35 +114,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func createPushNotifications() {
-        //notification content details
+    func helpCreateNotification(cTitle: String, cBody: String, dHour: Int, dMin: Int) -> UNNotificationRequest {
+        // notification content details
         let content = UNMutableNotificationContent()
-        content.title = "ESM Survey"
-        content.body = "Time for a survey! :)"
+        content.title = cTitle
+        content.body = cBody
         
-        //notification sending details: change interval between notifications at timeInterval (in seconds)
+        // notification sending times
         var date = DateComponents()
-        date.hour = 0
-        date.minute = 0
+        date.hour = dHour                                                                      // specify what hour of the day
+        date.minute = dMin                                                                    // specify what minute of the hour
         
-        let uuidString = UUID().uuidString
-        for i in 1...4 {
-            let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-            let request = UNNotificationRequest(identifier: uuidString,
-                                                content: content, trigger: trigger)
-            
-            // Schedule the request with the system.
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(request) { (error) in
-                if error != nil {
-                    print("error occurred while sending notification request")
-                }
-            }
-            let curHour = 6 * i
-            date.hour = curHour
+        let uuidString = UUID().uuidString                                                  // string representation of the NSUUID object
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)      // repeats: true will repeat sending the notification                                                                                     at the specified time
+        return UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger) // req is a basket of notification details
+    }
+    
+    // Called in order to actually send notifications
+    // Details of the content and when to send are specified here
+    // current implementation sends X notifications per day
+    func createPushNotifications() {
+        let request = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 0, dMin: 0) // edit the details for notifications in the parameters;                                                                                                                     hours are out of 24, minutes are out of 60
+        let request2 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 6, dMin: 0)
+        let request3 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 12, dMin: 0)
+        let request4 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 18, dMin: 0)
+        
+        // Schedule the request with the APN service.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil { print(error) }
+        }
+        notificationCenter.add(request2) { (error) in
+            if error != nil { print(error) }
+        }
+        notificationCenter.add(request3) { (error) in
+            if error != nil { print(error) }
+        }
+        notificationCenter.add(request4) { (error) in
+            if error != nil { print(error) }
         }
     }
     
+    // Called to make sure notifications are allowed
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             print("Notification settings: \(settings)")
@@ -154,10 +163,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
             }
-
         }
     }
     
+    // Called to print device id when device registers for notifications
     func application(
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
@@ -167,6 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Device Token: \(token)")
     }
     
+    // Called when error is encountered when registering for notifications
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error) {
