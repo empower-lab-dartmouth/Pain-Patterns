@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  HPDS-Data
+//  PPS-Data
 //
 //  Created by Joshua Ren on 2019-06-24.
 //  Copyright © 2019 Joshua Ren. All rights reserved.
@@ -87,14 +87,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    func applicationWillEnterForeground(_ application: UIApplication) {}
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.manager?.startAllSensors()
+    }
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    func applicationDidBecomeActive(_ application: UIApplication) {
-      
-        self.manager?.startAllSensors()
-
-    }
+    func applicationDidBecomeActive(_ application: UIApplication) {}
     
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     func applicationWillTerminate(_ application: UIApplication) {

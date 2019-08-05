@@ -57,7 +57,7 @@ if __name__ == "__main__":
     actdf = gen_df_from_remote_SQL(hostname, username,
                                    password, database_name, "aware_device")
     misdf = gen_df_from_remote_SQL(hostname, username,
-                                   password, database_name, "battery")
+                                   password, database_name, "accelerometer")
     healquandf = gen_df_from_remote_SQL(hostname, username,
                                         password, database_name, "health_kit_quantity")
     healcatdf = gen_df_from_remote_SQL(hostname, username,
@@ -67,5 +67,5 @@ if __name__ == "__main__":
     # qualtricsAnalysis(qualdf)
     # activitiesAnalysis(actdf)
     # healthQuanAnalysis(healquandf)
-    healthCatAnalysis(healcatdf)
-    # misAnalysis(misdf)
+    # healthCatAnalysis(healcatdf)
+    misAnalysis(misdf)

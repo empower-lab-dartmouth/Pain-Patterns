@@ -5,7 +5,7 @@
       location = "group:ResearchKit/ResearchKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:HPDS-Data.xcodeproj">
+      location = "group:/Users/jr/Desktop/Pain-Patterns/iOS/HPDS-Data/HPDS-Data.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -266,14 +266,14 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 - (NSSet *)characteristicDataTypesToRead {
     NSMutableSet* dataTypesSet = [[NSMutableSet alloc] init];
     
-//    // CharacteristicType
-//    HKCharacteristicType *characteristicType;
-//    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
-//    [dataTypesSet addObject:characteristicType];
-//    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
-//    [dataTypesSet addObject:characteristicType];
-//    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth];
-//    [dataTypesSet addObject:characteristicType];
+    // CharacteristicType
+    HKCharacteristicType *characteristicType;
+    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
+    [dataTypesSet addObject:characteristicType];
+    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
+    [dataTypesSet addObject:characteristicType];
+    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth];
+    [dataTypesSet addObject:characteristicType];
 //    characteristicType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierFitzpatrickSkinType];
 //    [dataTypesSet addObject:characteristicType];
     
@@ -284,30 +284,30 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 - (NSSet *) getDataQuantityTypes{
     NSMutableSet* dataTypesSet = [[NSMutableSet alloc] init];
     
-//    // QuantityType
+    // QuantityType
     HKQuantityType *quantityType;
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMassIndex];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyFatPercentage];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierLeanBodyMass];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
-//    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
-//    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMassIndex];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyFatPercentage];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeight];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierLeanBodyMass];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
+    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
+    [dataTypesSet addObject:quantityType];
 //    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierNikeFuel];
 //    [dataTypesSet addObject:quantityType];
     quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
@@ -328,8 +328,8 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 //    [dataTypesSet addObject:quantityType];
 //    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
 //    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierNumberOfTimesFallen];
-//    [dataTypesSet addObject:quantityType];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierNumberOfTimesFallen];
+    [dataTypesSet addObject:quantityType];
 //    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierElectrodermalActivity];
 //    [dataTypesSet addObject:quantityType];
 //    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierInhalerUsage];
@@ -420,7 +420,7 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 //    [dataTypesSet addObject:quantityType];
 //    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryWater];
 //    [dataTypesSet addObject:quantityType];
-//    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierUVExposure];
+    quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierUVExposure];
     [dataTypesSet addObject:quantityType];
     
     return dataTypesSet;
@@ -429,12 +429,12 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 - (NSSet *) getDataCategoryTypes{
      NSMutableSet* dataTypesSet = [[NSMutableSet alloc] init];
     
-//    // CategoryType
+    // CategoryType
     HKCategoryType *categoryType;
     categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis];
     [dataTypesSet addObject:categoryType];
-//    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierAppleStandHour];
-//    [dataTypesSet addObject:categoryType];
+    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierAppleStandHour];
+    [dataTypesSet addObject:categoryType];
 //    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierCervicalMucusQuality];
 //    [dataTypesSet addObject:categoryType];
 //    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierOvulationTestResult];
@@ -443,8 +443,8 @@ NSString * const AWARE_PREFERENCES_PLUGIN_HEALTHKIT_FREQUENCY = @"frequency_heal
 //    [dataTypesSet addObject:categoryType];
 //    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierIntermenstrualBleeding];
 //    [dataTypesSet addObject:categoryType];
-//    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSexualActivity];
-//    [dataTypesSet addObject:categoryType];
+    categoryType = [HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSexualActivity];
+    [dataTypesSet addObject:categoryType];
 
     return dataTypesSet;
 }
