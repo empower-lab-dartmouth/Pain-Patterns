@@ -10,7 +10,7 @@ These instructions will get you copies of the iOS and Android app and Python scr
 
 ## Setup (github and python)
 
-### cloning from git
+### Cloning from git
 Navigate into the directory on your computer where you would like to place the project folder. Then type the following command to download the project.
 
 ```
@@ -70,7 +70,7 @@ After this, you should be able to run the command `$ python3 [filename]` to run 
 * `read_sql_remote_data.py`: This program pulls data from a remote SQL database and reads it into a Pandas dataframe. By default, this script is set up to pull data from an AWARE server (though this can be altered by modifying the host and credentials).
 * `analysis.py`: This file imports the importent functions from the other two files so its all in one place.
 
-#### Data Collection
+#### Python Data Collection
 If you want to use a different file from the analysis file...
 The following instructions detail how to collect data from a deployment of the PPS Mobile Client:
 
