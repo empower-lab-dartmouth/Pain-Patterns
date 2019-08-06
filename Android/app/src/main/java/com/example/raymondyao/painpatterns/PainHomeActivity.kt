@@ -10,12 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.aware.*
-import com.aware.providers.Accelerometer_Provider
-import com.aware.providers.Aware_Provider
-import com.aware.providers.Barometer_Provider
-import com.aware.providers.Proximity_Provider
-import com.aware.utils.Aware_Sensor
 import java.util.*
 import android.app.AlarmManager
 import android.content.Context.ALARM_SERVICE
@@ -37,23 +31,6 @@ class PainHomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pain_home)
 
         scheduleRecurringWork()
-
-        Aware.startAWARE(applicationContext)
-
-        Aware.setSetting(applicationContext, Aware_Preferences.FREQUENCY_ACCELEROMETER, 200000) //20Hz
-        Aware.setSetting(applicationContext, Aware_Preferences.THRESHOLD_ACCELEROMETER, 0.02f) // [x,y,z] > 0.02 to log
-
-        Aware.startAccelerometer(this)
-
-        Accelerometer.setSensorObserver {
-            val x = it.getAsDouble(Accelerometer_Provider.Accelerometer_Data.VALUES_0)
-            val y = it.getAsDouble(Accelerometer_Provider.Accelerometer_Data.VALUES_1)
-            val z = it.getAsDouble(Accelerometer_Provider.Accelerometer_Data.VALUES_2)
-
-            Log.d("rayray", "x = $x y = $y, z = $z")
-        }
-
-
     }
 
     fun scheduleRecurringWork() {

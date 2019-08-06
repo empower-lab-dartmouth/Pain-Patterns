@@ -191,7 +191,7 @@
 - (void)startSyncStorage {
 
     if(self->isUploading){
-        NSString * message= [NSString stringWithFormat:@"[%@] Now sendsor data is uploading.", self.sensorName];
+        NSString * message= [NSString stringWithFormat:@"[%@] Now sensor data is uploading.", self.sensorName];
         NSLog(@"%@", message);
         return;
     }
