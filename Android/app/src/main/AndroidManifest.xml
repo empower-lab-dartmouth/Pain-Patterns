@@ -11,6 +11,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <service
+                android:name=".SensorService"
+                android:enabled="true"
+                android:exported="true">
+        </service>
+
         <activity android:name=".PainHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,7 +32,8 @@
         </activity>
         <activity android:name=".AboutActivity">
         </activity>
-        <receiver android:name=".PainBroadcastReceiver"></receiver>
+
+        <receiver android:name=".PainBroadcastReceiver"/>
     </application>
 
 </manifest>
