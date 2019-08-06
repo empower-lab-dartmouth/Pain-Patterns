@@ -3,7 +3,6 @@
 //  PPS-Data
 //
 //  Created by Joshua Ren on 2019-06-24.
-//  Copyright © 2019 Joshua Ren. All rights reserved.
 //
 
 import UIKit
@@ -112,32 +111,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func helpCreateNotification(cTitle: String, cBody: String, dHour: Int, dMin: Int) -> UNNotificationRequest {
+    func helpCreateNotification(contentTitle: String, contentBody: String, dateHour: Int, dateMinutes: Int) -> UNNotificationRequest {
         // notification content details
         let content = UNMutableNotificationContent()
-        content.title = cTitle
-        content.body = cBody
+        content.title = contentTitle
+        content.body = contentBody
         
-        // notification sending times
+        // notification sending times: per day
         var date = DateComponents()
-        date.hour = dHour                                                                      // specify what hour of the day
-        date.minute = dMin                                                                    // specify what minute of the hour
+        date.hour = dateHour
+        date.minute = dateMinutes
         
         let uuidString = UUID().uuidString                                                  // string representation of the NSUUID object
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)      // repeats: true will repeat sending the notification                                                                                     at the specified time
-        return UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger) // req is a basket of notification details
+        return UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger) // return a basket containing notification details
     }
     
     // Called in order to actually send notifications
     // Details of the content and when to send are specified here
     // current implementation sends X notifications per day
     func createPushNotifications() {
-        let request = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 0, dMin: 0) // edit the details for notifications in the parameters;                                                                                                                     hours are out of 24, minutes are out of 60
-        let request2 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 6, dMin: 0)
-        let request3 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 12, dMin: 0)
-        let request4 = helpCreateNotification(cTitle: "ESM Survey", cBody: "Time to take a survey! :)", dHour: 18, dMin: 0)
+        //  change the values for contentTitle, contentBody, dateHour, dateMinutes to alter the content of the notification and when it gets sent
+        //  create more requests and add to notification center if needed
+        let request = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 0)
+        let request2 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 6, dateMinutes: 0)
+        let request3 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 12, dateMinutes: 0)
+        let request4 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 18, dateMinutes: 0)
         
-        // Schedule the request with the APN service.
+        // Schedule the request with the APN service by adding them to the notificationCenter
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.add(request) { (error) in
             if error != nil { print(error) }
