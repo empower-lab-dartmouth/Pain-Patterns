@@ -8,6 +8,8 @@ This repository contains the code for an iOS and Android based data collection a
 
 These instructions will get you copies of the iOS and Android app and Python scripts up and running on your local machine for development and testing purposes.
 
+If part of the development team PLEASE remember to push and pull code responsibly to avoid merge conflicts. :)
+
 ## Setup (github and python)
 
 ### Cloning from git
