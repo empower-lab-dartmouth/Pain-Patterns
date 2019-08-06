@@ -114,9 +114,6 @@ To deploy the PPS Mobile Client to an iOS simulator or to a live device:
 [AWARE Framework iOS](https://github.com/tetujin/AWAREFramework-iOS)  
 [ResearchKit](https://github.com/ResearchKit/ResearchKit)
 
-## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more project context and contribution instructions/guidance!
-
 ## Authors
 * Joshua Ren
 * Raymond Yao
