@@ -104,9 +104,10 @@ To deploy the PPS Mobile Client to an iOS simulator or to a live device:
 
 2. Update the ```getUrl() -> String``` function in ```AppDelegate.swift``` to return the url of your new AWARE server. Additionally, update the variable ```email``` under the ```openEmail``` function in ```ViewController.swift``` to an email at which you would like users to be able to reach you.
 
-3. Update the notification requests ```func createPushNotifications()``` function in ```AppDelegate.swift``` to contain the content of the notifications and when to send them by changing the values for each request. Add each request to the notificationCenter in order to send notifications at the specified time.
+3. Update the notification request ```func createPushNotifications()``` function in ```AppDelegate.swift``` to contain the content of the notifications and when to send them by changing the values for each request. Remember to add each request to the notificationCenter in order to send notifications at the specified time. If more notifications are needed simply 
 
 4. Build and run the project in XCode. From XCode, you can set the simulated device on which you would like the project to run. To run on a live device, plug the device into your computer. After a few seconds, the device should become available to select from the menu in the top-left corner (to the right of the play button). Select your device, then run the project.
+    **Note: Simulated devices will only register as a device in the AWARE server; this is normal as simulated devices do not         have sensor capabilities.
 
 ## Built With
 [AWARE Framework iOS](https://github.com/tetujin/AWAREFramework-iOS)  
