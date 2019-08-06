@@ -12,6 +12,7 @@ import android.widget.Toast
 import java.util.*
 import java.text.SimpleDateFormat
 import android.provider.Settings.Secure
+import com.google.firebase.database.FirebaseDatabase
 
 class SensorService : Service(), SensorEventListener{
 
@@ -98,8 +99,22 @@ class SensorService : Service(), SensorEventListener{
 //            val val3 = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_VALUE_3));
 //            Log.d("rayray", "$en, $timeStamp, $devID, $val1, $val2, $val3")
 //        }
+
+        addToFirebase(entryNum, dateAndTime, deviceID, x, y, z)
+
         db!!.addEntry(entryNum, dateAndTime, deviceID, x, y, z)
         Log.d("rayray", db!!.numberOfRows().toString())
+    }
+
+    fun addToFirebase(entryNum: Int, dateAndTime: String, deviceID: String, x: Float, y: Float, z: Float) {
+        val fb = FirebaseDatabase.getInstance().reference
+        val table = fb.child("android/users")
+        val user = table.child("ryao/$entryNum")
+        user.child("timestamp").setValue(dateAndTime)
+        user.child("device_ID").setValue(deviceID)
+        user.child("value_1").setValue(x)
+        user.child("value_2").setValue(y)
+        user.child("value_3").setValue(z)
     }
 
     fun makeToast(message: String) {

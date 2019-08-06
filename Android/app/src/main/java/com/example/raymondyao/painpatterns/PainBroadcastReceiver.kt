@@ -10,7 +10,7 @@ import android.media.RingtoneManager
 import android.app.PendingIntent
 import android.app.NotificationManager
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 
 
