@@ -120,15 +120,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more project context and contribution
 ## Authors
 * Joshua Ren
 * Raymond Yao
-* Michael Cooper
-* Alex Weitzman
-* Gabe Saldivar
-* Andrew Ying
+* Grace Zhao
 
 ## License
 
 ## Acknowledgments
-[Michael Cooper](https://github.com/cooper-mj) for his development on the HPDS project, which was used as a base for the development of this app, which can be found here https://github.com/StanfordHCI/Hybrid-Physical-Digital-Spaces.
+[Michael Cooper](https://github.com/cooper-mj) and his team for his development on the HPDS project, which was used as a base for the development of this app, which can be found here https://github.com/StanfordHCI/Hybrid-Physical-Digital-Spaces.
 
 [Yuuki Nishiyama](https://github.com/tetujin) for his work on the AWARE Framework iOS, and for his AWARE Framework tutorials, which were used in the development of this application.
 
