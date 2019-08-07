@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app needs contacts to work properly.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string></string>
 	<key>NSHealthShareUsageDescription</key>
@@ -34,6 +36,8 @@
 	<string>Location</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Location</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs contacts to work properly.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>To track movement.</string>
 	<key>UIBackgroundModes</key>

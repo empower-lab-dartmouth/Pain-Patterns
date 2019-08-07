@@ -1,0 +1,6 @@
+framework module Pods_PPS_Data {
+  umbrella header "Pods-PPS-Data-umbrella.h"
+
+  export *
+  module * { export * }
+}

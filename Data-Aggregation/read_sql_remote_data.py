@@ -2,6 +2,7 @@ import pymysql
 import pandas as pd
 import time
 
+
 '''
 Return a list of column names a table that the pymysql cursor is pointing
 to.
@@ -9,12 +10,27 @@ to.
 
 
 def get_column_names(cursor):
-
     desc = cursor.description
     column_names = []
     for tup in desc:
         column_names.append(tup[0])
     return column_names
+
+
+'''
+Returns a list of the table names stored in the SQL.
+'''
+
+
+def get_table_names(hostname, username, password, database_name):
+    pymysql.install_as_MySQLdb()
+    connection = pymysql.connect(hostname, username, password, database_name)
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM " + table_name)
+
+    data = cursor.fetchall()
+    data_list = []
 
 
 '''
@@ -58,9 +74,9 @@ if __name__ == "__main__":
     # Study Dashboard > View Credentials.
     # Column names can be viewed by accessing
     hostname = "api.awareframework.com"
-    username = "Cooper_1945"
-    password = "tPSSOpKF"  # password redacted
-    database_name = "Cooper_1945"
+    username = "Ren_2425"
+    password = "4kjUaIyK"  # password redacted
+    database_name = "Ren_2425"
 
     table_name = "accelerometer"  # Table of interest
 

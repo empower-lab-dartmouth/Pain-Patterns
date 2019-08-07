@@ -25,7 +25,7 @@ def activitiesAnalysis(df):
 
 # analyze healthkit quantity data from AWARE server SQL database.
 def healthQuanAnalysis(df):
-    hdf = df.groupby(["timestamp"])
+    hdf = df.groupby(["type"])
     # displays the entries of each HealthKit type grouped by type
     for key, item in hdf:
         print(hdf.get_group(key).to_string(), "\n\n")
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     database_name = "Ren_2425"
 
     actdf = gen_df_from_remote_SQL(hostname, username,
-                                   password, database_name, "aware_device")
+                                   password, database_name, "plugin_ios_activity_recognition")
     misdf = gen_df_from_remote_SQL(hostname, username,
                                    password, database_name, "accelerometer")
     healquandf = gen_df_from_remote_SQL(hostname, username,
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     # qualdf = read_csv_data('')
 
     # qualtricsAnalysis(qualdf)
-    # activitiesAnalysis(actdf)
-    # healthQuanAnalysis(healquandf)
-    # healthCatAnalysis(healcatdf)
+    activitiesAnalysis(actdf)
+    healthQuanAnalysis(healquandf)
+    healthCatAnalysis(healcatdf)
     misAnalysis(misdf)
