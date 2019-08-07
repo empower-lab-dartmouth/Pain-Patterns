@@ -1,6 +1,0 @@
-framework module Pods_PPS {
-  umbrella header "Pods-PPS-umbrella.h"
-
-  export *
-  module * { export * }
-}
