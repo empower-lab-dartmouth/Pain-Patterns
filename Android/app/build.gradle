@@ -14,6 +14,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        compileOptions {
+            sourceCompatibility = 1.8
+            targetCompatibility = 1.8
+        }
+
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
     buildTypes {
         release {
@@ -28,6 +36,7 @@ android {
 }
 
 dependencies {
+    def work_version = "2.1.0"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.0'
@@ -38,6 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-database:18.0.1'
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
 }
 
 apply plugin: 'com.google.gms.google-services'

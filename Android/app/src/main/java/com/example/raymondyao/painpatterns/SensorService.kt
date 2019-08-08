@@ -1,6 +1,7 @@
 package com.example.raymondyao.painpatterns
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -100,7 +101,7 @@ class SensorService : Service(), SensorEventListener{
 //            Log.d("rayray", "$en, $timeStamp, $devID, $val1, $val2, $val3")
 //        }
 
-        addToFirebase(entryNum, dateAndTime, deviceID, x, y, z)
+//        addToFirebase(entryNum, dateAndTime, deviceID, x, y, z)
 
         db!!.addEntry(entryNum, dateAndTime, deviceID, x, y, z)
         Log.d("rayray", db!!.numberOfRows().toString())

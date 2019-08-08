@@ -39,6 +39,10 @@ public class PainPatternsSQLDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public SQLiteDatabase getSQLiteDatabase() {
+        return this.getWritableDatabase();
+    }
+
     public void addEntry(int entryNum, String timestamp, String deviceID, float value_1, float value_2, float value_3) {
         database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
