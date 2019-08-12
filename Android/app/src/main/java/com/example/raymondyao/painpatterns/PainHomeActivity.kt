@@ -1,13 +1,19 @@
 package com.example.raymondyao.painpatterns
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import java.util.*
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.Context
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import java.util.concurrent.TimeUnit
 
+//TODO: COMMENT CODE
 
 class PainHomeActivity : AppCompatActivity() {
 
@@ -15,14 +21,19 @@ class PainHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pain_home)
 
-        scheduleRecurringWork()
+        scheduleRecurringNotification()
 
         val intent = Intent(this, SensorService::class.java)
         startService(intent)
 
+        val uploadWorkerRequest = PeriodicWorkRequestBuilder<UploadWorker>(15, TimeUnit.MINUTES)
+            .build()
+        val workManager = WorkManager.getInstance(this)
+        workManager.enqueue(uploadWorkerRequest)
     }
 
-    fun scheduleRecurringWork() {
+
+    fun scheduleRecurringNotification() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 14)
         calendar.set(Calendar.MINUTE, 55)
