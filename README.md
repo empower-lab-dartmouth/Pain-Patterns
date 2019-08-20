@@ -70,7 +70,7 @@ After this, you should be able to run the command `$ python3 [filename]` to run 
 #### Python file descriptions:
 * `read_building_data.py`: Upon being passed in the filename of a .csv file containing building or Qualtrics survey data (since Stanford Qualtrics does not allow API access, to read in the data, one must download the Qualtrics responses as a .csv file, then run this script on the downloaded file), this program creates a Pandas dataframe of the building data.
 * `read_sql_remote_data.py`: This program pulls data from a remote SQL database and reads it into a Pandas dataframe. By default, this script is set up to pull data from an AWARE server (though this can be altered by modifying the host and credentials).
-* `analysis.py`: This file imports the importent functions from the other two files so its all in one place.
+* `write_csvs.py.py`: This file imports the importent functions from the other two files so its all in one place.
 
 #### Python Data Collection
 If you want to use a different file from the analysis file...
