@@ -103,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.manager?.syncAllSensors()
     }
     
+    
     // Called in order to get permissions to send notificatoins
     func registerForPushNotifications() {
         UNUserNotificationCenter.current()
@@ -115,11 +116,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Helper function for creating notifications
     func helpCreateNotification(contentTitle: String, contentBody: String, dateHour: Int, dateMinutes: Int) -> UNNotificationRequest {
         // notification content details
         let content = UNMutableNotificationContent()
         content.title = contentTitle
         content.body = contentBody
+        content.sound    = .default
         
         // notification sending times: per day
         var date = DateComponents()
@@ -136,14 +139,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // current implementation sends X notifications per day
     func createPushNotifications() {
         //  change the values for contentTitle, contentBody, dateHour, dateMinutes to alter the content of the notification and when it gets sent
-        //  create more requests and add to notification center if needed
-        let request = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 0)
-        let request2 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 1)
+        //  create more requests by copy pasting to requests array if needed
+        let requests = [
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 6, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 12, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 18, dateMinutes: 0),
+            
+            ]
+        // Schedule the request with the APN service by adding them to the UNUserNotificationCenter.current()
+        for request in requests {
+            UNUserNotificationCenter.current().add(request)  { (error) in
+                if let error = error {
+                    print("error in PPS reminder: \(error.localizedDescription)")
+                }
+            }
+        }
         
-        // Schedule the request with the APN service by adding them to the notificationCenter
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request)
-        notificationCenter.add(request2)
     }
     
     // Called to make sure notifications are allowed
