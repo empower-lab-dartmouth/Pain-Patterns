@@ -106,7 +106,7 @@ To deploy the PPS Mobile Client to an iOS simulator or to a live device:
 
 2. Update the ```getUrl() -> String``` function in ```AppDelegate.swift``` to return the url of your new AWARE server. Additionally, update the variable ```email``` under the ```openEmail``` function in ```ViewController.swift``` to an email at which you would like users to be able to reach you.
 
-3. Update the notification request in the ```func createPushNotifications()``` function in ```AppDelegate.swift```. Change the values, such as ```contentTitle: "ESM Survey"``` used to define each ```request``` variable to contain the desired content and sending time. 
+3. Update the notification request in the ```func createPushNotifications()``` function in ```ViewController.swift```. Change the values, such as ```contentTitle: "ESM Survey"``` used to define each ```request``` variable to contain the desired content and sending time. 
     **Note: Remember to add each request to the notificationCenter in order to send notifications.  
 
 4. Build and run the project in XCode. From XCode, you can set the simulated device on which you would like the project to run. To run on a live device, plug the device into your computer. After a few seconds, the device should become available to select from the menu in the top-left corner (to the right of the play button). Select your device, then run the project.
