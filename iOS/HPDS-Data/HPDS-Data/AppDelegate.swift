@@ -103,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.manager?.syncAllSensors()
     }
     
+    
     // Called in order to get permissions to send notificatoins
     func registerForPushNotifications() {
         UNUserNotificationCenter.current()
@@ -115,11 +116,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Helper function for creating notifications
     func helpCreateNotification(contentTitle: String, contentBody: String, dateHour: Int, dateMinutes: Int) -> UNNotificationRequest {
         // notification content details
         let content = UNMutableNotificationContent()
         content.title = contentTitle
         content.body = contentBody
+        content.sound    = .default
         
         // notification sending times: per day
         var date = DateComponents()
@@ -136,26 +139,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // current implementation sends X notifications per day
     func createPushNotifications() {
         //  change the values for contentTitle, contentBody, dateHour, dateMinutes to alter the content of the notification and when it gets sent
-        //  create more requests and add to notification center if needed
-        let request = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 0)
-        let request2 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 6, dateMinutes: 0)
-        let request3 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 12, dateMinutes: 0)
-        let request4 = helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 18, dateMinutes: 0)
+        //  create more requests by copy pasting to requests array if needed
+        let requests = [
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 0, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 6, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 12, dateMinutes: 0),
+            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 18, dateMinutes: 0),
+            
+            ]
+        // Schedule the request with the APN service by adding them to the UNUserNotificationCenter.current()
+        for request in requests {
+            UNUserNotificationCenter.current().add(request)  { (error) in
+                if let error = error {
+                    print("error in PPS reminder: \(error.localizedDescription)")
+                }
+            }
+        }
         
-        // Schedule the request with the APN service by adding them to the notificationCenter
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { (error) in
-            if error != nil { print(error) }
-        }
-        notificationCenter.add(request2) { (error) in
-            if error != nil { print(error) }
-        }
-        notificationCenter.add(request3) { (error) in
-            if error != nil { print(error) }
-        }
-        notificationCenter.add(request4) { (error) in
-            if error != nil { print(error) }
-        }
     }
     
     // Called to make sure notifications are allowed
@@ -167,23 +167,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
-    }
-    
-    // Called to print device id when device registers for notifications
-    func application(
-        _ application: UIApplication,
-        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-        ) {
-        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-        let token = tokenParts.joined()
-        print("Device Token: \(token)")
-    }
-    
-    // Called when error is encountered when registering for notifications
-    func application(
-        _ application: UIApplication,
-        didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register: \(error)")
     }
     
 }

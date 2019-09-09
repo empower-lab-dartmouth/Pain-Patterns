@@ -70,7 +70,7 @@ After this, you should be able to run the command `$ python3 [filename]` to run 
 #### Python file descriptions:
 * `read_building_data.py`: Upon being passed in the filename of a .csv file containing building or Qualtrics survey data (since Stanford Qualtrics does not allow API access, to read in the data, one must download the Qualtrics responses as a .csv file, then run this script on the downloaded file), this program creates a Pandas dataframe of the building data.
 * `read_sql_remote_data.py`: This program pulls data from a remote SQL database and reads it into a Pandas dataframe. By default, this script is set up to pull data from an AWARE server (though this can be altered by modifying the host and credentials).
-* `analysis.py`: This file imports the importent functions from the other two files so its all in one place.
+* `pain_analysis.ipynb`: This file imports the importent functions from the other two files so its all in one place.
 
 #### Python Data Collection
 If you want to use a different file from the analysis file...
@@ -106,7 +106,7 @@ To deploy the PPS Mobile Client to an iOS simulator or to a live device:
 
 2. Update the ```getUrl() -> String``` function in ```AppDelegate.swift``` to return the url of your new AWARE server. Additionally, update the variable ```email``` under the ```openEmail``` function in ```ViewController.swift``` to an email at which you would like users to be able to reach you.
 
-3. Update the notification request in the ```func createPushNotifications()``` function in ```AppDelegate.swift```. Change the values, such as ```contentTitle: ESM Survey``` used to define each ```request``` variable to contain the desired content and sending time. 
+3. Update the notification request in the ```func createPushNotifications()``` function in ```ViewController.swift```. Change the values, such as ```contentTitle: "ESM Survey"``` used to define each ```request``` variable to contain the desired content and sending time. 
     **Note: Remember to add each request to the notificationCenter in order to send notifications.  
 
 4. Build and run the project in XCode. From XCode, you can set the simulated device on which you would like the project to run. To run on a live device, plug the device into your computer. After a few seconds, the device should become available to select from the menu in the top-left corner (to the right of the play button). Select your device, then run the project.

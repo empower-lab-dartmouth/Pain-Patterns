@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CoreMotion
 import ResearchKit
 import SafariServices
 
 class ViewController: UIViewController {
+    
+    let motion = CMMotionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +65,5 @@ class ViewController: UIViewController {
         let svc = SFSafariViewController(url: urlString! as URL)
         self.present(svc, animated: true, completion: nil)
     }
-    
     
 }
