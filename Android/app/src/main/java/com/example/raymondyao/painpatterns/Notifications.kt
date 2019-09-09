@@ -1,3 +1,7 @@
+/*
+    Handles sending the user a reminder notification to complete the survey
+ */
+
 package com.example.raymondyao.painpatterns
 
 import android.app.Notification
@@ -6,15 +10,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 //import com.sun.java.swing.plaf.gtk.GTKColorType.MID
-import android.media.RingtoneManager
-import android.app.PendingIntent
 import android.app.NotificationManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 
 
-class PainBroadcastReceiver : BroadcastReceiver() {
+class Notifications : BroadcastReceiver() {
 
     companion object {
         // ID code that is used to launch the download notifications
@@ -32,12 +33,12 @@ class PainBroadcastReceiver : BroadcastReceiver() {
         // for the notification before we send it
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                PainBroadcastReceiver.NOTIFICATION_CHANNEL_ID, PainBroadcastReceiver.NOTIFICATION_CHANNEL_ID,
+                Notifications.NOTIFICATION_CHANNEL_ID, Notifications.NOTIFICATION_CHANNEL_ID,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             manager.createNotificationChannel(channel)
 
-            builder = Notification.Builder(context, PainBroadcastReceiver.NOTIFICATION_CHANNEL_ID)
+            builder = Notification.Builder(context, Notifications.NOTIFICATION_CHANNEL_ID)
         }
 
         builder.setContentTitle("Pain Project")
@@ -46,7 +47,7 @@ class PainBroadcastReceiver : BroadcastReceiver() {
         builder.setSmallIcon(R.drawable.painimage)
 
         val notification = builder.build()
-        manager.notify(PainBroadcastReceiver.NOTIFICATION_ID, notification)
+        manager.notify(Notifications.NOTIFICATION_ID, notification)
     }
 
 }

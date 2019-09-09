@@ -1,3 +1,6 @@
+/*
+    Worker that grabs data from the local SQLite database and uploads to Firebase
+ */
 package com.example.raymondyao.painpatterns
 
 import android.content.Context
@@ -15,24 +18,21 @@ class UploadWorker(appContext: Context, workerParams: WorkerParameters)
 
     private var database: SQLiteDatabase ?= null
 
-
+    // runs every 15 minutes
     override fun doWork(): Result {
-        Log.d("rayray", "in dowork()")
-
         if(isConnected()) {
-            Log.d("rayray", "in isConnected()")
             var obj = PainPatternsSQLDatabase(applicationContext)
             database = obj.writableDatabase
             uploadSQLiteToFirebase()
+        } else {    // user is not connected, so retry at a later time
+            return Result.retry()
         }
 
-        // Indicate whether the task finished successfully with the Result
         return Result.success()
-        // TODO: return result.retry() if not connected
     }
 
     fun uploadSQLiteToFirebase() {
-        val query = "select * from " + PainPatternsSQLDatabase.ROW_ENTRY_TABLE_NAME
+        val query = "select * from " + PainPatternsSQLDatabase.ACCELERATION_DATA_TABLE_NAME
         val cursor = database?.rawQuery(query,null)
         try {
             while(cursor!!.moveToNext()) {
@@ -47,14 +47,22 @@ class UploadWorker(appContext: Context, workerParams: WorkerParameters)
                 //TODO: Delete old entries from SQLite database after adding to Firebase
             }
         } finally {
+            clearDatabase()
             cursor?.close()
+
         }
+    }
+
+    // Delete SQLite database when the entries have already been loaded into Firebase
+    fun clearDatabase() {
+        val query = "DELETE from " + PainPatternsSQLDatabase.ACCELERATION_DATA_TABLE_NAME
+        database?.execSQL(query)
     }
 
     fun addToFirebase(entryNum: Int, dateAndTime: String, deviceID: String, x: Float, y: Float, z: Float) {
         val fb = FirebaseDatabase.getInstance().reference
         val table = fb.child("android/users")
-        val user = table.child("ryao/$entryNum")
+        val user = table.child("ryao/accelerometer_data/$entryNum")
         user.child("timestamp").setValue(dateAndTime)
         user.child("device_ID").setValue(deviceID)
         user.child("value_1").setValue(x)

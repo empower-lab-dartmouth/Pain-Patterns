@@ -1,3 +1,7 @@
+/*
+    Starts the SensorService class
+ */
+
 package com.example.raymondyao.painpatterns
 
 import android.content.BroadcastReceiver

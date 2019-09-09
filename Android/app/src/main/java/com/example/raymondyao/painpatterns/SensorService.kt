@@ -1,56 +1,110 @@
+/*
+    Manages starting services and controlling output of data
+ */
+
 package com.example.raymondyao.painpatterns
 
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.IBinder
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
+import android.os.Handler
+import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
 import java.util.*
 import java.text.SimpleDateFormat
 import android.provider.Settings.Secure
 import com.google.firebase.database.FirebaseDatabase
+import kotlin.collections.ArrayList
+import androidx.core.os.HandlerCompat.postDelayed
 
-class SensorService : Service(), SensorEventListener{
+class SensorService : Service(), SensorEventListener {
+
+    companion object {
+        private const val TAG = "rayray"
+    }
 
     private var sManager : SensorManager? = null
-    private var sensor : Sensor? = null
-    private var accel : Sensor? = null
     private var db : PainPatternsSQLDatabase? = null
 
-    private var entryNum = 0
+    private var entryNumAccel = 0
+    private var entryNumProximity = 0
+    private var timerEx = false
+//    private var wl: PowerManager.WakeLock? = null
 
     override fun onCreate() {
         super.onCreate()
-        setUpSensors()
+        Log.d(TAG, "in onCreate")
         db = PainPatternsSQLDatabase(this)
+
+        // controls frequency of collected data (1000 ms = 1 second)
+        Handler().postDelayed(object : Runnable {
+            override fun run() {
+                Handler().postDelayed(this, 1000)
+                timerEx = true
+            }
+        }, 1000)
+
+        /*
+
+        WakeLock to prevent service from stopping...need to fix this
+        val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+        wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "myapp:mywakelocktag")
+        */
     }
 
-    fun setUpSensors() {
+    /*
+        Registers individual sensors passed in as parameters
+     */
+    fun setUpSensors(sensor_type: Int) {
+        Log.d(TAG, "in setUpSensors")
         // Get sensor manager on starting the service.
         sManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        // Get accelerometer sensor information
-        accel = sManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        var sensor: Sensor ?= null
+
+        // Get sensor information
+        sensor = sManager?.getDefaultSensor(sensor_type)
 
         // Registering...
-        sManager?.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL)
+        sManager?.registerListener(this, sensor, 20000000)
+    }
 
-        // Get default sensor type
-        sensor = sManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    /*
+        Returns the type (which is specified as an int) of a sensor that is passed
+     */
+    fun getTypeSensor(sensorName: String) : Int {
+        Log.d(TAG, "in gettypesensor")
+
+        // Add new sensors here
+        when (sensorName) {
+            "accelerometer_data" -> return Sensor.TYPE_ACCELEROMETER
+            "proximity_data" -> return Sensor.TYPE_PROXIMITY
+            "relative_humidity" -> return Sensor.TYPE_RELATIVE_HUMIDITY
+            else -> return -1
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        setUpSensors()
+
+        // Sets up sensors that were specified by remote config
+        val data: ArrayList<String> = intent!!.getStringArrayListExtra("sensors")
+        for (i in data) {
+            val sensor_type = getTypeSensor(i)
+            setUpSensors(sensor_type)
+        }
         return START_STICKY
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        Log.d("rayray", "in onBind")
+        Log.d(TAG, "in onBind")
         return null
     }
 
@@ -62,7 +116,7 @@ class SensorService : Service(), SensorEventListener{
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        Log.d("rayray", "accuracy changed")
+        Log.d(TAG, "accuracy changed")
     }
 
     fun getDateAndTime() : String {
@@ -81,41 +135,46 @@ class SensorService : Service(), SensorEventListener{
         return androidID
     }
 
+    // Called when sensor collects new information
     override fun onSensorChanged(event: SensorEvent?) {
-        val values = event?.values
-        val x = values!![0]
-        val y = values!![1]
-        val z = values!![2]
-        val dateAndTime = getDateAndTime()
-        val deviceID = getDeviceID()
-        makeToast("$entryNum\nx: $x, y: $y, z: $z\n$dateAndTime\n$deviceID")
-        entryNum++
-//        if(db!!.numberOfRows() >= 120) {
-//            val data = db!!.getRowEntry(100)
-//            val en = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_ENTRY_NUM));
-//            val timeStamp = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_TIMESTAMP));
-//            val devID = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_DEVICE_ID));
-//            val val1 = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_VALUE_1));
-//            val val2 = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_VALUE_2));
-//            val val3 = data.getString(data.getColumnIndex(PainPatternsSQLDatabase.ROW_ENTRY_VALUE_3));
-//            Log.d("rayray", "$en, $timeStamp, $devID, $val1, $val2, $val3")
+            if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER && timerEx) {
+                timerEx = false
+                val values = event?.values
+                val x = values!![0]
+                val y = values!![1]
+                val z = values!![2]
+                val dateAndTime = getDateAndTime()
+                val deviceID = getDeviceID()
+                Log.d(TAG,"acceleration values: $x, $y, $z")
+                makeToast("$entryNumAccel\nx: $x, y: $y, z: $z\n$dateAndTime\n$deviceID")
+                entryNumAccel++
+
+                db!!.addAccelerationEntry(entryNumAccel, dateAndTime, deviceID, x, y, z)
+                Log.d(TAG, db!!.numberOfRows().toString())
+            }
+
+            if (event!!.sensor.type == Sensor.TYPE_PROXIMITY) {
+                // sensor information for proximity sensor
+                val values = event?.values
+                Log.d(TAG,"proximity values: ${values[0]}")
+                entryNumProximity++
+//                makeToast("${values[0]}")
+//                db!!.addEntry(entryNum, getDateAndTime(), getDeviceID())
+            }
+
+            if (event!!.sensor.type == Sensor.TYPE_RELATIVE_HUMIDITY) {
+                // sensor information for humidity
+            }
 //        }
-
-//        addToFirebase(entryNum, dateAndTime, deviceID, x, y, z)
-
-        db!!.addEntry(entryNum, dateAndTime, deviceID, x, y, z)
-        Log.d("rayray", db!!.numberOfRows().toString())
     }
 
-    fun addToFirebase(entryNum: Int, dateAndTime: String, deviceID: String, x: Float, y: Float, z: Float) {
+    fun addToFirebase(entryNum: Int, dateAndTime: String, deviceID: String, proximity_value: Float) {
         val fb = FirebaseDatabase.getInstance().reference
         val table = fb.child("android/users")
-        val user = table.child("ryao/$entryNum")
+        val user = table.child("ryao/proximity_data/$entryNum")
         user.child("timestamp").setValue(dateAndTime)
         user.child("device_ID").setValue(deviceID)
-        user.child("value_1").setValue(x)
-        user.child("value_2").setValue(y)
-        user.child("value_3").setValue(z)
+        user.child("value_1").setValue(proximity_value)
     }
 
     fun makeToast(message: String) {

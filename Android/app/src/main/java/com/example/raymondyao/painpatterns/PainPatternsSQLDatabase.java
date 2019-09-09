@@ -1,3 +1,7 @@
+/*
+    Adds entries into the local SQLite database on the user's device
+ */
+
 package com.example.raymondyao.painpatterns;
 
 import android.content.ContentValues;
@@ -10,7 +14,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class PainPatternsSQLDatabase extends SQLiteOpenHelper {
 
     public static final String DBName = "Pain-Patterns-DB";
-    public static final String ROW_ENTRY_TABLE_NAME = "rowEntry";
+    public static final String ACCELERATION_DATA_TABLE_NAME = "acceleration_entries";
+    public static final String PROXIMITY_DATA_TABLE_NAME = "proximity_entries";
+    public static final String HUMIDITY_DATA_TABLE_NAME = "humidity_entries";
     public static final String ROW_ENTRY_ENTRY_NUM = "entryNum";
     public static final String ROW_ENTRY_TIMESTAMP = "timestamp";
     public static final String ROW_ENTRY_DEVICE_ID= "deviceID";
@@ -27,8 +33,21 @@ public class PainPatternsSQLDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // creates data for acceleration table
         db.execSQL(
-                "create table rowEntry " +
+                "create table acceleration_entries " +
+                        "(entryNum integer primary key, timestamp, deviceID, value_1, value_2, value_3)"
+        );
+
+        // creates data for proximity table
+        db.execSQL(
+                "create table proximity_entries " +
+                        "(entryNum integer primary key, timestamp, deviceID, value_1, value_2, value_3)"
+        );
+
+        // creates data for humidity table
+        db.execSQL(
+                "create table humidity_entries " +
                         "(entryNum integer primary key, timestamp, deviceID, value_1, value_2, value_3)"
         );
     }
@@ -43,7 +62,7 @@ public class PainPatternsSQLDatabase extends SQLiteOpenHelper {
         return this.getWritableDatabase();
     }
 
-    public void addEntry(int entryNum, String timestamp, String deviceID, float value_1, float value_2, float value_3) {
+    public void addAccelerationEntry(int entryNum, String timestamp, String deviceID, float value_1, float value_2, float value_3) {
         database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("entryNum", entryNum);
@@ -52,18 +71,13 @@ public class PainPatternsSQLDatabase extends SQLiteOpenHelper {
         values.put("value_1", value_1);
         values.put("value_2", value_2);
         values.put("value_3", value_3);
-        database.insert(ROW_ENTRY_TABLE_NAME, null, values);
+        database.insert(ACCELERATION_DATA_TABLE_NAME, null, values);
     }
 
-    public Cursor getRowEntry(int entryNum) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from rowEntry where entryNum=" + entryNum + "", null );
-        return res;
-    }
 
     public int numberOfRows(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, ROW_ENTRY_TABLE_NAME);
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, ACCELERATION_DATA_TABLE_NAME);
         return numRows;
     }
 }

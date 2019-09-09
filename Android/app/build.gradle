@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-database:18.0.1'
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation 'com.google.firebase:firebase-config:18.0.0'
 
 }
 

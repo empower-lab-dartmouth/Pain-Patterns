@@ -4,6 +4,7 @@
           package="com.example.raymondyao.painpatterns">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
             android:allowBackup="true"
@@ -12,11 +13,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <service
-                android:name=".UploadSQLiteToFirebase"
-                android:enabled="true"
-                android:exported="true">
-        </service>
         <service
                 android:name=".SensorService"
                 android:enabled="true"
@@ -39,7 +35,7 @@
         <activity android:name=".AboutActivity">
         </activity>
 
-        <receiver android:name=".PainBroadcastReceiver"/>
+        <receiver android:name=".Notifications"/>
     </application>
 
 </manifest>
