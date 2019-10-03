@@ -1,8 +1,8 @@
 # Pain-Patterns
-Repo for Pain Patterns, supervised by James Landay and Liz Murnane.
+Repo for Pain Patterns, supervised Liz Murnane.
 
 ## Getting Started
-Welcome to Pain Projects! Thank you for stopping by.
+Welcome to the Pain Patterns project! Thank you for stopping by.
 
 This repository contains the code for an iOS and Android based data collection app and a series of Python scripts to aggregate the data for processing and analysis.
 
