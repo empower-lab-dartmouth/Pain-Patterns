@@ -41,13 +41,13 @@
 		0B3BD8BD5066EF15EBAAE94F /* Pods-PPS-Data.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPS-Data.release.xcconfig"; path = "Target Support Files/Pods-PPS-Data/Pods-PPS-Data.release.xcconfig"; sourceTree = "<group>"; };
 		12672C51C7A57B5632C86641 /* Pods-PPS-DataUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPS-DataUITests.release.xcconfig"; path = "Target Support Files/Pods-PPS-DataUITests/Pods-PPS-DataUITests.release.xcconfig"; sourceTree = "<group>"; };
 		282774F74D384DF553C7E246 /* Pods_PPS_DataUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPS_DataUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B4B524723583ECC00514569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B57CA3422FB7D9A0052D3C4 /* PPS-Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PPS-Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B57CA3722FB7D9A0052D3C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B57CA3922FB7D9A0052D3C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B57CA3C22FB7D9A0052D3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B57CA3E22FB7D9B0052D3C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B57CA4122FB7D9B0052D3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2B57CA4322FB7D9B0052D3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B57CA4822FB7D9B0052D3C4 /* PPS-DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPS-DataTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B57CA4C22FB7D9B0052D3C4 /* PPS_DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPS_DataTests.swift; sourceTree = "<group>"; };
 		2B57CA4E22FB7D9B0052D3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,13 +118,13 @@
 		2B57CA3622FB7D9A0052D3C4 /* PPS-Data */ = {
 			isa = PBXGroup;
 			children = (
-				2B57CA6722FB888C0052D3C4 /* PPS-Data.entitlements */,
+				2B4B524723583ECC00514569 /* Info.plist */,
 				2B57CA3722FB7D9A0052D3C4 /* AppDelegate.swift */,
 				2B57CA3922FB7D9A0052D3C4 /* ViewController.swift */,
+				2B57CA6722FB888C0052D3C4 /* PPS-Data.entitlements */,
 				2B57CA3B22FB7D9A0052D3C4 /* Main.storyboard */,
 				2B57CA3E22FB7D9B0052D3C4 /* Assets.xcassets */,
 				2B57CA4022FB7D9B0052D3C4 /* LaunchScreen.storyboard */,
-				2B57CA4322FB7D9B0052D3C4 /* Info.plist */,
 			);
 			path = "PPS-Data";
 			sourceTree = "<group>";
@@ -183,6 +183,7 @@
 				2B57CA3122FB7D9A0052D3C4 /* Frameworks */,
 				2B57CA3222FB7D9A0052D3C4 /* Resources */,
 				772984CB6047E0DF8010E6D1 /* [CP] Embed Pods Frameworks */,
+				116BE3714AC6EE34BD3D4D2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,6 +314,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		116BE3714AC6EE34BD3D4D2C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PPS-Data/Pods-PPS-Data-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PPS-Data/Pods-PPS-Data-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PPS-Data/Pods-PPS-Data-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		16B3D5DBE457B844C11E3236 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -491,6 +509,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -552,6 +571,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

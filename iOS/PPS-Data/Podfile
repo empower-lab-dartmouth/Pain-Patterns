@@ -7,6 +7,7 @@ target 'PPS-Data' do
 
   # Pods for PPS-Data
   platform :ios, '12.0'
+  pod 'AWAREFramework', :git=>'https://github.com/tetujin/AWAREFramework-iOS.git'
   pod 'ResearchKit', '~> 1.0'
 
   target 'PPS-DataTests' do

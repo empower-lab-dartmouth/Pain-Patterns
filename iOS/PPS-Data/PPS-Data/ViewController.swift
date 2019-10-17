@@ -6,17 +6,16 @@
 //
 
 import UIKit
-import CoreMotion
+import AWAREFramework
 import ResearchKit
 import SafariServices
 
 class ViewController: UIViewController {
     
-    let motion = CMMotionManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,5 +64,6 @@ class ViewController: UIViewController {
         let svc = SFSafariViewController(url: urlString! as URL)
         self.present(svc, animated: true, completion: nil)
     }
+    
     
 }

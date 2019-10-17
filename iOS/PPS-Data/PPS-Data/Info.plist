@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>PPS</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,8 +22,35 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app needs bluetooth capabilities to work properly.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs calendar to work properly.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera to work properly.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app needs contacts to work properly.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>This app needs health access capabilities to work properly.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>HealthKit Share</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>HealthKit Update</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs contacts to work properly.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>To track movement.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>LaunchScreen</string>
 		<string>external-accessory</string>
 		<string>fetch</string>
 		<string>location</string>

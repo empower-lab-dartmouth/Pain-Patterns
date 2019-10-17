@@ -1,16 +1,78 @@
 PODS:
+  - AppAuth (1.2.0):
+    - AppAuth/Core (= 1.2.0)
+    - AppAuth/ExternalUserAgent (= 1.2.0)
+  - AppAuth/Core (1.2.0)
+  - AppAuth/ExternalUserAgent (1.2.0)
+  - AWAREFramework (1.5.5):
+    - GoogleSignIn (~> 5.0)
+    - ios-ntp (~> 1.1)
+    - SCNetworkReachability (~> 2.0)
+    - TPCircularBuffer (~> 1.6)
+  - CocoaAsyncSocket (7.6.3)
+  - GoogleSignIn (5.0.1):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.2.2):
+    - GTMSessionFetcher/Full (= 1.2.2)
+  - GTMSessionFetcher/Core (1.2.2)
+  - GTMSessionFetcher/Full (1.2.2):
+    - GTMSessionFetcher/Core (= 1.2.2)
+  - ios-ntp (1.1.9):
+    - CocoaAsyncSocket
+  - macros_blocks (0.0.4):
+    - macros_blocks/core (= 0.0.4)
+  - macros_blocks/core (0.0.4)
   - ResearchKit (1.5.2)
+  - SCNetworkReachability (2.0.6):
+    - SCNetworkReachability/Core (= 2.0.6)
+  - SCNetworkReachability/Core (2.0.6):
+    - macros_blocks (~> 0.0.1)
+  - TPCircularBuffer (1.6.1)
 
 DEPENDENCIES:
+  - AWAREFramework (from `https://github.com/tetujin/AWAREFramework-iOS.git`)
   - ResearchKit (~> 1.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
+    - AppAuth
+    - CocoaAsyncSocket
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - ios-ntp
+    - macros_blocks
     - ResearchKit
+    - SCNetworkReachability
+    - TPCircularBuffer
+
+EXTERNAL SOURCES:
+  AWAREFramework:
+    :git: https://github.com/tetujin/AWAREFramework-iOS.git
+
+CHECKOUT OPTIONS:
+  AWAREFramework:
+    :commit: 276834dd0687e2da56793d26a355f7bec65c587a
+    :git: https://github.com/tetujin/AWAREFramework-iOS.git
 
 SPEC CHECKSUMS:
+  AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
+  AWAREFramework: 9e8f060768e3f2f7cf544ff56035bd8ff470f2af
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  GoogleSignIn: 3a51b9bb8e48b635fd7f4272cee06ca260345b86
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  ios-ntp: 49a4ef0866aee5343627710c1c7de71d7c064417
+  macros_blocks: cf3ff5810b798f462def9f1e3999817dc45cf2df
   ResearchKit: a5770681dd61afddd3d1f24d232b9abf00cba454
+  SCNetworkReachability: dbb0150b1a7a4579e148420132da19e718b955ce
+  TPCircularBuffer: c13243556527551c4d320709c7b14a6d20cdc30a
 
-PODFILE CHECKSUM: 029186b029d9a28374014eb71ba1a4830f944c1a
+PODFILE CHECKSUM: d53386b3aee2fd6eb0ed55f38169b63cc25f645b
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
