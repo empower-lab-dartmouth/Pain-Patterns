@@ -98,6 +98,8 @@ Below, you will find descriptions of some of the key files in the project:
 XCode:
 * ```AppDelegate.swift```: Contains the code necessary to get the sensors up and running, and sending data to the AWARE server.
 * ```ViewController.swift```: Provides the openEmail function (which enables the user to contact the researchers running the study), and the researchKitSurvey function (which starts a survey through ResearchKit).
+* ```AWAREFramework/Classes/Plugins/HealthKit/AWAREHealthKit.m```: Contains healthkit parameters that can be enabled/disabled from device.
+* ```AWAREFramework/Classes/Core/Sensor/AWARESensorManager.m```: Contains syncAllSensors function which controls when the device can sync data with the db.
 
 ## Deployment
 To deploy the PPS Mobile Client to an iOS simulator or to a live device:
@@ -119,7 +121,6 @@ To deploy the PPS Mobile Client to an iOS simulator or to a live device:
 ## Authors
 * Joshua Ren
 * Raymond Yao
-* Grace Zhao
 
 ## License
 
