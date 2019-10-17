@@ -8,20 +8,19 @@ import matplotlib.pyplot as plt
 # analyze plugin_ios_activity_recognition data from AWARE server SQL database.
 def activitiesAnalysis(df):
     print(df.to_string())
-    # plt.close('all')
-    # gdf = df.groupby("activities")  # group by activities type for aggregate
-    # actMap = {}
-    # # create a map that links activities type to frequency
-    # for key, item in gdf:
-    #     actMap[key] = len(gdf.get_group(key))
-    # labels = list(actMap.keys())
-    # sizes = list(actMap.values())
-    # fig1, ax1 = plt.subplots()
-    # ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
-    #         startangle=90)
-    # # Equal aspect ratio ensures that pie is drawn as a circle.
-    # ax1.axis('equal')
-    # plt.show()
+    plt.close('all')
+    gdf = df.groupby("activities")  # group by activities type for aggregate
+    actMap = {}
+    # create a map that links activities type to frequency
+    for key, item in gdf:
+        actMap[key] = len(gdf.get_group(key))
+    labels = list(actMap.keys())
+    sizes = list(actMap.values())
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+    # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax1.axis('equal')
+    plt.show()
 
 #write df to a csv
 def write_df_to_csv(df, name):
@@ -32,7 +31,7 @@ def write_df_to_csv(df, name):
     
 #writes healthkit quantity data from AWARE server SQL database into a csv.
 def healthQuanAnalysis(df):
-    print "running healthQuanAnalysis()"
+    print("running healthQuanAnalysis()")
     #hdf = df.groupby(["timestamp"])
     
     dfcsv = df.to_csv()
@@ -43,7 +42,7 @@ def healthQuanAnalysis(df):
 
 # analyze healthkit category data from AWARE server SQL database.
 def healthCatAnalysis(df):
-    print "running healthCatAnalysis()"
+    print("running healthCatAnalysis()")
     #hdf = df.groupby(["timestamp"])
     
     dfcsv = df.to_csv()
@@ -55,13 +54,13 @@ def healthCatAnalysis(df):
 
 # analyze qualtrics survey data
 def qualtricsAnalysis(df): 
-    print "running qualtricsAnalysis()"
+    print("running qualtricsAnalysis()")
     print(df)
 
 
 #analyze accelerometer data
 def misAnalysis(df):
-    print "running misAnalysis"    
+    print("running misAnalysis")
     dfcsv = df.to_csv()
     f = open('healthCattest.csv', 'w')
     f.write(dfcsv)
