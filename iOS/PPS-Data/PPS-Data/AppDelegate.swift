@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
         // Get HealthKit Data
-        healthKitData()
+        getHealthKitData()
 
         print("Setup complete.")
 

@@ -13,8 +13,10 @@ import UserNotifications
 func registerForPushNotifications() {
     UNUserNotificationCenter.current()
         .requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            print("Notification permission granted: \(granted)")
-            guard granted else { return }
+            guard granted else {
+                print("notification permission not granted")
+                return
+            }
             getNotificationSettings()
             createPushNotifications()
     }
@@ -65,7 +67,10 @@ func createPushNotifications() -> [String : [[Int: Int]]] {
     let dateMinutes = [0, 0, 0, 0, 0]
     
     // make sure all arrays are the same length
-    if ((contentTitles.count != contentSubTitles.count) || (contentSubTitles.count != contentBodies.count) || (contentBodies.count != dateHours.count) || (dateHours.count != dateMinutes.count)) {print("\nERROR: lengths of arrays do not match\n")}
+    if ((contentTitles.count != contentSubTitles.count) || (contentSubTitles.count != contentBodies.count) || (contentBodies.count != dateHours.count) || (dateHours.count != dateMinutes.count)) {
+        print("\nERROR: lengths of arrays do not match\n")
+        abort()
+    }
     
     // notifications are created here
     UNUserNotificationCenter.current().getPendingNotificationRequests() { notifications in
@@ -89,9 +94,9 @@ func getNotificationSettings() {
     }
 }
 
+// creates dicts that map notification titles to sending times
+// uses trigger times useful for auto opening surveys
 func helpGetHours(titles: [String], dateHours: [Int], dateMinutes: [Int]) -> [String : [[Int: Int]]] {
-    
-    // makes trigger times useful for auto opening surveys
     var nameToTimes = [String : [[Int : Int]]]()
     for i in 0..<dateHours.count {
         let curTitle = titles[i]
@@ -108,6 +113,7 @@ func helpGetHours(titles: [String], dateHours: [Int], dateMinutes: [Int]) -> [St
     return nameToTimes
 }
 
+// gets notification times by utilizing return value of createPushNotifications()
 func getNotificationTimes() -> [String : [[Int: Int]]] {
     return createPushNotifications()
 }
