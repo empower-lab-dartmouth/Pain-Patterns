@@ -64,10 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.manager?.startAllSensors()                         //Start sensors running
         })
         
-        //  Initialize notification capabilities
-        registerForPushNotifications()
-        createPushNotifications()
-        
         print("Setup complete.")
 
         return true
@@ -77,7 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks.
     func applicationWillResignActive(_ application: UIApplication) {
         
-        listScheduledNotifications()
         //Here we use this to sync up our data with AWARE.
         self.manager?.syncAllSensors()
     }
@@ -99,80 +94,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     func applicationWillTerminate(_ application: UIApplication) {}
     
-    
-    // Called in order to get permissions to send notificatoins
-    func registerForPushNotifications() {
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .sound, .badge]) {
-                [weak self] granted, error in
-                
-                print("Permission granted: \(granted)")
-                guard granted else { return }
-                self?.getNotificationSettings()
-        }
-    }
-    
-    // Helper function for creating notifications
-    func helpCreateNotification(contentTitle: String, contentBody: String, dateHour: Int, dateMinutes: Int) -> UNNotificationRequest {
-        // notification content details
-        let content = UNMutableNotificationContent()
-        content.title = contentTitle
-        content.body = contentBody
-        content.sound = .default
-        
-        // notification sending times: per day
-        var date = DateComponents()
-        date.hour = dateHour
-        date.minute = dateMinutes
-        
-        let uuidString = UUID().uuidString
-        // repeats: true will repeat sending the at the specified time
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-        return UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger) // return a basket containing notification details
-    }
-    
-    // Called in order to actually send notifications
-    // Details of the content and when to send are specified here
-    // current implementation sends X notifications per day
-    func createPushNotifications() {
-        //  change the values for contentTitle, contentBody, dateHour, dateMinutes to alter the content of the notification and when it gets sent
-        //  create more requests by copy pasting to requests array if needed
-        let requests = [
-            helpCreateNotification(contentTitle: "ESM Survey", contentBody: "Time to take a survey! :)", dateHour: 18, dateMinutes: 0),
-            ]
-        // Schedule the request with the APN service by adding them to the UNUserNotificationCenter.current()
-        for request in requests {
-            UNUserNotificationCenter.current().add(request)  { (error) in
-                if let error = error {
-                    print("error in PPS reminder: \(error.localizedDescription)")
-                }
-            }
-        }
-        //see current set of notifications
-        listScheduledNotifications()
-    }
-    
-    // Called to make sure notifications are allowed
-    func getNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            print("Notification settings: \(settings)")
-            guard settings.authorizationStatus == .authorized else { return }
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
-        }
-    }
-
-    
-    // prints all current pending notifications
-    func listScheduledNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-            var count = 0
-            for notification in notifications {
-                print(notification)
-                count += 1
-            }
-            print("\nnotification count: ", count, "\n")
-        }
-    }
-}
+ }

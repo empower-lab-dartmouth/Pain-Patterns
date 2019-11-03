@@ -15,6 +15,7 @@
 		2B57CA4D22FB7D9B0052D3C4 /* PPS_DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B57CA4C22FB7D9B0052D3C4 /* PPS_DataTests.swift */; };
 		2B57CA5822FB7D9B0052D3C4 /* PPS_DataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B57CA5722FB7D9B0052D3C4 /* PPS_DataUITests.swift */; };
 		2B57CA6622FB888C0052D3C4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B57CA6522FB888C0052D3C4 /* HealthKit.framework */; };
+		2BBD525A236F770D00918B84 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBD5259236F770D00918B84 /* Notifications.swift */; };
 		864F6D2BF780F9A3FE52D653 /* Pods_PPS_DataUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282774F74D384DF553C7E246 /* Pods_PPS_DataUITests.framework */; };
 		C904C756189A3C586708CD48 /* Pods_PPS_DataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EC2D6A897265D98886CD78 /* Pods_PPS_DataTests.framework */; };
 		ECAE7857261A1C12DF4F284F /* Pods_PPS_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DF0A54F0951DD2A268DCA9 /* Pods_PPS_Data.framework */; };
@@ -56,6 +57,7 @@
 		2B57CA5922FB7D9B0052D3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B57CA6522FB888C0052D3C4 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		2B57CA6722FB888C0052D3C4 /* PPS-Data.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PPS-Data.entitlements"; sourceTree = "<group>"; };
+		2BBD5259236F770D00918B84 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		3A7526D9546F992E700BB1EB /* Pods-PPS-DataTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPS-DataTests.release.xcconfig"; path = "Target Support Files/Pods-PPS-DataTests/Pods-PPS-DataTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D71773D76199F611F877203 /* Pods-PPS-DataUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPS-DataUITests.debug.xcconfig"; path = "Target Support Files/Pods-PPS-DataUITests/Pods-PPS-DataUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		79DF0A54F0951DD2A268DCA9 /* Pods_PPS_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPS_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 		2B57CA2B22FB7D9A0052D3C4 = {
 			isa = PBXGroup;
 			children = (
+				2BBD5258236F76F100918B84 /* Notification-Tools */,
 				2B57CA3622FB7D9A0052D3C4 /* PPS-Data */,
 				2B57CA4B22FB7D9B0052D3C4 /* PPS-DataTests */,
 				2B57CA5622FB7D9B0052D3C4 /* PPS-DataUITests */,
@@ -145,6 +148,14 @@
 				2B57CA5922FB7D9B0052D3C4 /* Info.plist */,
 			);
 			path = "PPS-DataUITests";
+			sourceTree = "<group>";
+		};
+		2BBD5258236F76F100918B84 /* Notification-Tools */ = {
+			isa = PBXGroup;
+			children = (
+				2BBD5259236F770D00918B84 /* Notifications.swift */,
+			);
+			path = "Notification-Tools";
 			sourceTree = "<group>";
 		};
 		AEFC8628F4D505C575D3A182 /* Frameworks */ = {
@@ -421,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BBD525A236F770D00918B84 /* Notifications.swift in Sources */,
 				2B57CA3A22FB7D9A0052D3C4 /* ViewController.swift in Sources */,
 				2B57CA3822FB7D9A0052D3C4 /* AppDelegate.swift in Sources */,
 			);
