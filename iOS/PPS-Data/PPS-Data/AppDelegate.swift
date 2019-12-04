@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import SafariServices
+import Firebase
 
 
 @UIApplicationMain
@@ -25,12 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // configure firebase
+        // firebase will be called to sync data in Tools
+        FirebaseApp.configure()
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
         //  Setup background fetching interval for sensors
         //  Default is set up at the minimum background fetch
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
+        // this is a unique id for this app, will persist unless user deletes and redownloads the app
+        let appId = UIDevice.current.identifierForVendor!.uuidString
+        
         // Get HealthKit Data
-        getHealthKitData()
+        getHealthKitData(ref: ref, appId: appId)
 
         print("Setup complete.")
 

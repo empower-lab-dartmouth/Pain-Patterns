@@ -15,14 +15,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         registerForPushNotifications()
         
-        // check if we want to automatically open any surveys upon launching
-        checkAutoOpenDiary()
-        checkAutoOpenSurvey()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        // check if we want to automatically open any surveys upon opening the app
+        checkAutoOpenDiary()
+        checkAutoOpenSurvey()
     }
     
     override func didReceiveMemoryWarning() {

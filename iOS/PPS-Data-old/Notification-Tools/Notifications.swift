@@ -63,7 +63,7 @@ func createPushNotifications() -> [String : [[Int: Int]]] {
     let contentTitles = ["Survey", "Survey", "Survey", "Survey", "Diary"]
     let contentSubTitles = ["", "", "", "", ""]
     let contentBodies = ["Time to take a survey! :)", "Time to take a survey! :)", "Time to take a survey! :)", "Time to take a survey! :)", "Diary Time :)"]
-    let dateHours = [0, 6, 12, 18, 14]
+    let dateHours = [0, 6, 12, 18, 11]
     let dateMinutes = [0, 0, 0, 0, 0]
     
     // make sure all arrays are the same length
